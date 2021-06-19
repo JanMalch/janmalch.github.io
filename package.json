@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "format": "prettier --write index.ts"
   },
   "keywords": [],
   "author": "",
@@ -24,9 +25,16 @@
     "html-minifier": "^4.0.0",
     "log-symbols": "^4.0.0",
     "node-fetch": "^2.6.1",
+    "prettier": "^2.3.1",
     "purgecss": "^4.0.3",
     "sharp": "^0.28.3",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "semi": true,
+    "tabWidth": 2
   }
 }
