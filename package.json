@@ -1,0 +1,32 @@
+{
+  "name": "janmalch.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@primer/css": "^17.3.0",
+    "github-markdown-css": "^4.0.0"
+  },
+  "devDependencies": {
+    "@octokit/core": "^3.5.1",
+    "@types/csso": "^3.5.1",
+    "@types/html-minifier": "^4.0.0",
+    "@types/node-fetch": "^2.5.10",
+    "@types/sharp": "^0.28.3",
+    "csso": "^4.2.0",
+    "dotenv": "^10.0.0",
+    "html-minifier": "^4.0.0",
+    "log-symbols": "^4.0.0",
+    "node-fetch": "^2.6.1",
+    "purgecss": "^4.0.3",
+    "sharp": "^0.28.3",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4"
+  }
+}
