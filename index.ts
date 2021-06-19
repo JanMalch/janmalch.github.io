@@ -1,9 +1,9 @@
-import {Octokit} from '@octokit/core';
+import { Octokit } from '@octokit/core';
 import csso from 'csso';
 import dotenv from 'dotenv';
-import {existsSync} from 'fs'
-import {readFile, mkdir, writeFile} from 'fs/promises'
-import {minify as minifyHtml} from 'html-minifier';
+import { existsSync } from 'fs';
+import { readFile, mkdir, writeFile } from 'fs/promises';
+import { minify as minifyHtml } from 'html-minifier';
 import logSymbols from 'log-symbols';
 import PurgeCSS from 'purgecss';
 import fetch from 'node-fetch';
@@ -30,18 +30,26 @@ const htmlMinifyOptions = {
 
 async function main() {
   if (!existsSync('build')) {
-    await mkdir('build')
+    await mkdir('build');
   }
-  const octokit = new Octokit({auth: accessToken});
+  const octokit = new Octokit({ auth: accessToken });
 
-  const avatarBuffer = await octokit.request('GET /users/{username}', {
-    username: 'JanMalch',
-  }).then(res => fetch(res.data.avatar_url)).then(res => res.buffer())
+  const avatarBuffer = await octokit
+    .request('GET /users/{username}', {
+      username: 'JanMalch',
+    })
+    .then((res) => fetch(res.data.avatar_url))
+    .then((res) => res.buffer());
   console.log(logSymbols.success, 'Fetched avatar');
 
   await sharp('favicon-shape.png')
     .composite([
-      { input: await sharp(avatarBuffer).resize(48).toBuffer(), top: 0, left: 0, blend: 'in' },
+      {
+        input: await sharp(avatarBuffer).resize(48).toBuffer(),
+        top: 0,
+        left: 0,
+        blend: 'in',
+      },
     ])
     .png({ quality: 80 })
     .toFile('build/favicon.ico');
@@ -52,12 +60,10 @@ async function main() {
       repo: 'JanMalch',
     })
     .then((res) =>
-      Buffer.from(res.data.content, 'base64')
-        .toString()
-        .replace(':wave:', '')
+      Buffer.from(res.data.content, 'base64').toString().replace(':wave:', '')
     );
 
-  console.log(logSymbols.success, 'Fetched profile README')
+  console.log(logSymbols.success, 'Fetched profile README');
 
   const rendered = await octokit
     .request('POST /markdown', {
@@ -65,7 +71,7 @@ async function main() {
     })
     .then((res) => res.data.replace('Hi there', 'Hi there &#128075;'));
 
-  console.log(logSymbols.success, 'Rendered Markdown as HTML')
+  console.log(logSymbols.success, 'Rendered Markdown as HTML');
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -94,13 +100,16 @@ ${rendered}
 
 </body>
 </html>
-`
-
+`;
 
   const css =
-    (await readFile(`./node_modules/@primer/css/dist/layout.css`, 'utf-8')) + '\n' +
-    (await readFile(`./node_modules/github-markdown-css/github-markdown.css`, 'utf-8') +
-        `
+    (await readFile(`./node_modules/@primer/css/dist/layout.css`, 'utf-8')) +
+    '\n' +
+    ((await readFile(
+      `./node_modules/github-markdown-css/github-markdown.css`,
+      'utf-8'
+    )) +
+      `
 body {
     background: #fafafa;
     margin: 0;
@@ -163,35 +172,38 @@ img[data-canonical-src^="https://github-readme-stats.vercel.app"] {
         align-items: center;
     }
 }
-`
-    );
-  console.log(logSymbols.success, 'Loaded styles')
+`);
+  console.log(logSymbols.success, 'Loaded styles');
 
   const purgeCSSResults = await new PurgeCSS().purge({
     content: [{ raw: html, extension: 'html' }],
     css: [{ raw: css }],
     variables: true,
     keyframes: true,
-    safelist: [/canonical-src/]
+    safelist: [/canonical-src/],
   });
   const purgedStyles = purgeCSSResults[0].css;
-  console.log(logSymbols.success, 'Purged styles')
+  console.log(logSymbols.success, 'Purged styles');
   const minified = csso.minify(purgedStyles, {
     comments: false,
     forceMediaMerge: true,
   }).css;
-  console.log(logSymbols.success, 'Minified styles')
+  console.log(logSymbols.success, 'Minified styles');
 
+  await writeFile(
+    'build/index.html',
+    minifyHtml(
+      html.replace('</head>', `<style>${minified}</style></head>`),
+      htmlMinifyOptions
+    ),
+    'utf-8'
+  );
 
-  await writeFile('build/index.html', minifyHtml(html.replace('</head>', `<style>${minified}</style></head>`), htmlMinifyOptions), 'utf-8');
-
-  console.log(logSymbols.success, 'Written final index.html')
-
+  console.log(logSymbols.success, 'Written final index.html');
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(logSymbols.error, 'An unknown error occurred.');
   console.error(err);
   process.exit(1);
-})
-
+});
