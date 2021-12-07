@@ -69,7 +69,11 @@ async function main() {
     .request('POST /markdown', {
       text: profileReadme,
     })
-    .then((res) => res.data.replace('Hi there', 'Hi there &#128075;'));
+    .then((res) => res.data
+      .replace('Hi there', 'Hi there &#128075;')
+      .replace(/<h3/g, '<h2')
+      .replace(/<\/h3/g, '</h2')
+    );
 
   console.log(logSymbols.success, 'Rendered Markdown as HTML');
 
@@ -129,17 +133,10 @@ main h1 {
     align-items: flex-end;
 }
 
-.markdown-body footer h3 {
-    margin-top: 0;
+.markdown-body h2 {
+    font-size: 1.25em;
+    border: none;
 }
-
-.markdown-body footer div {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
 
 img[data-canonical-src^="https://github-readme-stats.vercel.app"] {
     border-radius: 6px;
