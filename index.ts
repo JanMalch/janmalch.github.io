@@ -73,6 +73,7 @@ async function main() {
       .replace('Hi there', 'Hi there &#128075;')
       .replace(/<h3/g, '<h2')
       .replace(/<\/h3/g, '</h2')
+      .replace(/(aria-hidden="true")/g, '$1 tabindex="-1"')
     );
 
   console.log(logSymbols.success, 'Rendered Markdown as HTML');
