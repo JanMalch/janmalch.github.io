@@ -74,6 +74,7 @@ async function main() {
       .replace(/<h3/g, '<h2')
       .replace(/<\/h3/g, '</h2')
       .replace(/(aria-hidden="true")/g, '$1 tabindex="-1"')
+      .replace(/rel="nofollow"/g, 'rel="noopener noreferrer"')
     );
 
   console.log(logSymbols.success, 'Rendered Markdown as HTML');
