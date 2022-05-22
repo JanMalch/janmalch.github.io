@@ -122,11 +122,11 @@ body {
     margin: 0;
 }
 
-main {
+main.markdown-body {
     padding: 64px 64px 128px;
-    background: white;
     border-left: 1px solid #eee;
     border-right: 1px solid #eee;
+    margin: 0 auto;
 }
 
 main h1 {
@@ -171,6 +171,17 @@ img[data-canonical-src^="https://github-readme-stats.vercel.app"] {
         justify-content: center;
         align-items: center;
     }
+}
+
+@media (prefers-color-scheme: dark) {
+  
+  body {
+    background: #000;
+  }
+  
+  main.markdown-body {
+    border-color: #1f2937;
+  }
 }
 `);
   console.log(logSymbols.success, 'Loaded styles');
