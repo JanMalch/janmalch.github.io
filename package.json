@@ -11,25 +11,25 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@primer/css": "^17.3.0",
-    "github-markdown-css": "^4.0.0"
+    "@primer/css": "^20.1.1",
+    "github-markdown-css": "^5.1.0"
   },
   "devDependencies": {
-    "@octokit/core": "^3.5.1",
-    "@types/csso": "^3.5.1",
-    "@types/html-minifier": "^4.0.0",
-    "@types/node-fetch": "^2.5.10",
-    "@types/sharp": "^0.28.3",
-    "csso": "^4.2.0",
-    "dotenv": "^10.0.0",
+    "@octokit/core": "^3.6.0",
+    "@types/csso": "^5.0.0",
+    "@types/html-minifier": "^4.0.2",
+    "@types/node-fetch": "^2.6.1",
+    "@types/sharp": "^0.30.2",
+    "csso": "^5.0.3",
+    "dotenv": "^16.0.1",
     "html-minifier": "^4.0.0",
-    "log-symbols": "^4.0.0",
-    "node-fetch": "^2.6.1",
-    "prettier": "^2.3.1",
-    "purgecss": "^4.0.3",
-    "sharp": "^0.28.3",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.3.4"
+    "log-symbols": "4",
+    "node-fetch": "2",
+    "prettier": "^2.6.2",
+    "purgecss": "^4.1.3",
+    "sharp": "^0.30.4",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.6.4"
   },
   "prettier": {
     "trailingComma": "es5",

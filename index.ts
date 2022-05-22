@@ -38,7 +38,7 @@ async function main() {
     .request('GET /users/{username}', {
       username: 'JanMalch',
     })
-    .then((res) => fetch(res.data.avatar_url))
+    .then((res) => fetch(res.data.avatar_url as string))
     .then((res) => res.buffer());
   console.log(logSymbols.success, 'Fetched avatar');
 
@@ -69,12 +69,13 @@ async function main() {
     .request('POST /markdown', {
       text: profileReadme,
     })
-    .then((res) => res.data
-      .replace('Hi there', 'Hi there &#128075;')
-      .replace(/<h3/g, '<h2')
-      .replace(/<\/h3/g, '</h2')
-      .replace(/(aria-hidden="true")/g, '$1 tabindex="-1"')
-      .replace(/rel="nofollow"/g, 'rel="noopener noreferrer"')
+    .then((res) =>
+      res.data
+        .replace('Hi there', 'Hi there &#128075;')
+        .replace(/<h3/g, '<h2')
+        .replace(/<\/h3/g, '</h2')
+        .replace(/(aria-hidden="true")/g, '$1 tabindex="-1"')
+        .replace(/rel="nofollow"/g, 'rel="noopener noreferrer"')
     );
 
   console.log(logSymbols.success, 'Rendered Markdown as HTML');
