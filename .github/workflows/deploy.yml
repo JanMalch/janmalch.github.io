@@ -10,14 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 15.x
+      - name: Use PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.1.0
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v1
         with:
-          node-version: 15.x
+          node-version: 16.x
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
       - name: Generate website
-        run: npm start
+        run: pnpm start
         env:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to GitHub Pages
