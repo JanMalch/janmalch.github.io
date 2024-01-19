@@ -1,40 +1,22 @@
 {
   "name": "janmalch.github.io",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Generator for my GitHub page",
+  "main": "main.mjs",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "start": "ts-node index.ts",
-    "format": "prettier --write index.ts"
+    "start": "node main.mjs",
+    "format": "prettier --write main.mjs styles.css"
   },
   "keywords": [],
-  "author": "",
+  "author": "JanMalch",
   "license": "ISC",
-  "dependencies": {
-    "@primer/css": "^20.1.1",
-    "github-markdown-css": "^5.1.0"
-  },
   "devDependencies": {
-    "@octokit/core": "^3.6.0",
-    "@types/csso": "^5.0.0",
-    "@types/html-minifier": "^4.0.2",
-    "@types/node-fetch": "^2.6.1",
-    "@types/sharp": "^0.30.2",
-    "csso": "^5.0.3",
-    "dotenv": "^16.0.1",
-    "html-minifier": "^4.0.0",
-    "log-symbols": "4",
-    "node-fetch": "2",
-    "prettier": "^2.6.2",
-    "purgecss": "^4.1.3",
-    "sharp": "^0.30.4",
-    "ts-node": "^10.8.0",
-    "typescript": "^4.6.4"
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "singleQuote": true,
-    "semi": true,
-    "tabWidth": 2
+    "@types/html-minifier-terser": "^7.0.2",
+    "@types/node": "^20.11.5",
+    "html-minifier-terser": "^7.2.0",
+    "marked": "^11.1.1",
+    "prettier": "^3.2.4"
   }
 }
