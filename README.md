@@ -3,3 +3,11 @@
 [![Deploy](https://github.com/JanMalch/janmalch.github.io/workflows/Deploy/badge.svg)](https://github.com/JanMalch/ts-code-contracts/workflows/Deploy)
 
 _Renders my [GitHub Profile](https://github.com/JanMalch/JanMalch) on my [GitHub Page](https://janmalch.github.io)._
+
+## Development
+
+```sh
+git submodule init # for initial setup after clone
+git submodule update # to load the contents
+git submodule update --remote --merge # to update to the latest commit
+```
